@@ -1,5 +1,7 @@
 import mlp
 
+#Optimizer controls the learning rate
+
 class Optimizer():
     """This class creates an optimizer for the network"""
     def __init__(self, neural_network: mlp.MLP, learning_rate: float = 0.01):

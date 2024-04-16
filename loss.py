@@ -1,6 +1,7 @@
 import numpy as np
 import tensor
 
+
 class Loss():
     """Abstract base class for loss functions"""
 
@@ -11,7 +12,6 @@ class Loss():
         """Gradient is derivate of loss function with respect to each parameter"""
         raise NotImplementedError
     
-
 
 class MSE(Loss):
     """Mean Square Error Loss Function"""

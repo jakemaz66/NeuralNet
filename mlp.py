@@ -1,5 +1,6 @@
 import tensor, layer
 
+
 class MLP:
     """This class creates a multi-layer perceptron"""
 
@@ -27,7 +28,7 @@ class MLP:
 
     def params_and_grads(self):
         for layer in self.layers:
-            
+
             #The pair is the weights/biases and their gradients
             for pair in [(layer.w, layer.grad_w), (layer.b, layer.grad_b)]:
                 yield pair

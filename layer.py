@@ -1,6 +1,7 @@
 import numpy as np
 import tensor
 
+
 class Layer():
 
     def __init__(self):
@@ -80,15 +81,30 @@ class Linear(Layer):
         self.grad_w = self.x.T @ grad
         return grad @ self.w.T
     
-class Activation(Layer):
-        def __init__(self,
-                    input_size,
-                    output_size,
-                    f,
-                    f_prime):
-            
-            """Initilize activation layer as generic layer that has feed forward function and its derivative"""
 
+class Activation(Layer):
+        def __init__(self, 
+                 input_size: int, 
+                 output_size: int,
+                 f, 
+                 f_prime) -> None:
+            
+            """Initialize an activation layer as a generic layer that also
+            has a function and its derivative, from which the gradient can
+            be computed
+
+            Args:
+                input_size (int): the number of input values to the layer
+                    (batch_size, input_size)
+                output_size (int): the number of output values to the next
+                    layer (or final value)
+                    (batch_size, output_size)
+                f (Callable[[tensor.Tensor], tensor.Tensor]): a 
+                    differentiable function
+                f_prime (Callable[[tensor.Tensor], tensor.Tensor]): the 
+                    first derivative of f, as a function
+            """
+            
             super().__init__()
 
             self.w = np.random.randn(input_size, output_size)
@@ -99,6 +115,7 @@ class Activation(Layer):
 
         def forward(self, x):
             self.x = x
+            #Activation function multiplied by weights and biases
             return self.f(self.x @ self.w + self.b)
         
         def backward(self, grad):
@@ -116,9 +133,25 @@ def tanh_prime(x):
     y = tanh(x)
     return 1 - y**2
 
+def relu(x):
+    x = np.clip(x, 0, None)
+    return x
+
+def relu_prime(x):
+    return (x > 0).astype(float)
 
 class Tanh(Activation):
+    """Tanh activation function"""
+
     def __init__(self, input_size, output_size):
+
         super().__init__(input_size, output_size, tanh, tanh_prime)
+
+class Relu(Activation):
+    """Reluactivation function"""
+
+    def __init__(self, input_size, output_size):
+
+        super().__init__(input_size, output_size, relu, relu_prime)
     
 
