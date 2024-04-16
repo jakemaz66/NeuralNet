@@ -1,4 +1,4 @@
-import train, layer, mlp
+import tensortango.train as train, tensortango.layer as layer, tensortango.mlp as mlp
 
 if __name__ == '__main__':
 

@@ -1,4 +1,4 @@
-import mlp
+import tensortango.mlp as mlp
 
 #Optimizer controls the learning rate
 

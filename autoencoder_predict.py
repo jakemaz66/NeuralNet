@@ -3,10 +3,10 @@ import wine_classifier
 import pandas as pd
 import keras
 from keras.losses import mean_squared_error
-import autoencoder
+import keras_autoencoder
 from sklearn.preprocessing import StandardScaler
 
-def reduce_features_dim(features, encoder=autoencoder.autoencoder):
+def reduce_features_dim(features, encoder=keras_autoencoder.autoencoder):
       
       for n_bottleneck in range(2, 6):
             n_layers = [8, 6, 4] if n_bottleneck < 4 else [8, 7, 6]
@@ -26,6 +26,7 @@ def reduce_features_dim(features, encoder=autoencoder.autoencoder):
 
 
 if __name__ == '__main__':
+    """Predicting Wine Quality with autoencoder reduced dimensionality data"""
     
 
     df = read_wine_data.read('winequality-red.csv')

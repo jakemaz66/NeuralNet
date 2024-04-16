@@ -1,5 +1,5 @@
 import numpy as np
-import tensor
+import tensortango.tensor as tensor
 
 
 class Layer():

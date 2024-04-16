@@ -1,4 +1,4 @@
-import tensor, loss, mlp, optimizer, data_iterator
+import tensortango.tensor as tensor, tensortango.loss as loss, tensortango.mlp as mlp, tensortango.optimizer as optimizer, tensortango.data_iterator as data_iterator
 
 def train(nn: mlp.MLP,
           features:tensor.Tensor,
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     #Exclusive Or NN
 
     import numpy as np
-    import layer
+    import tensortango.layer as layer
 
     #XOR because linear functions cannot represent
     features = np.array([[0,0],

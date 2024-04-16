@@ -1,4 +1,4 @@
-import tensor, layer
+import tensortango.tensor as tensor, tensortango.layer as layer
 
 
 class MLP:

@@ -39,6 +39,8 @@ def autoencoder(n_input, n_bottleneck, n_layers):
 
 if __name__ == '__main__':
 
+    """Predicting Wine quality with regular XGBoost model"""
+
     import read_wine_data
     import wine_classifier
     import pandas as pd
@@ -60,7 +62,6 @@ if __name__ == '__main__':
     
     #Fitting classifier on two dimensionalities
     classifier.train(features=features, labels=labels, scaling='Min/Max')
-
 
     print(f'Classifier Metadata: {classifier.metadata}')
 

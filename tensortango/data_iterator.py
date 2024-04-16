@@ -1,7 +1,7 @@
 """Create a mechanism for batching data for our neural network"""
 
 import numpy as np
-import tensor
+import tensortango.tensor as tensor
 from typing import Iterator
 
 class DataIterator():
