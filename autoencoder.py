@@ -73,9 +73,9 @@ if __name__ == '__main__':
     classifier_reduced2 = wine_classifier.WineClassifier('data', 'xgb')
     
     #Fitting classifier on two dimensionalities
-    classifier.train(features=features, labels=labels)
-    classifier_reduced.train(features=features_reduced, labels=labels)
-    classifier_reduced2.train(features=features_reduced2, labels=labels)
+    classifier.train(features=features, labels=labels, scaling='Min/Max')
+    classifier_reduced.train(features=features_reduced, labels=labels, scaling='Min/Max')
+    classifier_reduced2.train(features=features_reduced2, labels=labels, scaling='Min/Max')
 
     print(f'Classifier Metadata: {classifier.metadata}')
     print(f'Classifier Reduced Dimensionality 2 Metadata: {classifier_reduced.metadata}')

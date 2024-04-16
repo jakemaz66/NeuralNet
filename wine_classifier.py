@@ -25,7 +25,7 @@ class WineClassifier():
         self.metadata = {}
         self.model_dir = model_dir
 
-    def train(self, features: pd.DataFrame, labels: pd.Series):
+    def train(self, features: pd.DataFrame, labels: pd.Series, scaling:str):
         """
         Train the classifier on the data
 
@@ -49,7 +49,8 @@ class WineClassifier():
         self.metadata['training_rows'] = len(labels)
 
         self.metadata['accuracy'] = self.assess(features_test, labels_test)
-        print("i")
+        self.metadata['scaling'] = scaling
+     
 
     
     def predict(self, features: pd.DataFrame, proba: bool = False) -> numpy.ndarray:
