@@ -38,6 +38,7 @@ class WineClassifier():
         #Test size can go down as training data goes up
         features, features_test, labels, labels_test = train_test_split(features, labels, test_size=0.2)
 
+
         le = LabelEncoder()
         labels = le.fit_transform(labels)
         labels_test = le.transform(labels_test)
