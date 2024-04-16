@@ -40,6 +40,8 @@ def autoencoder(n_input, n_bottleneck, n_layers):
 if __name__ == '__main__':
 
     import read_wine_data
+    import wine_classifier
+
     df = read_wine_data.read('winequality-red.csv')
 
     #Defining features and labels
@@ -48,13 +50,35 @@ if __name__ == '__main__':
 
     #Store scaling factors in metadata
     enc, full = autoencoder(n_input=11, n_bottleneck=2, n_layers=[8,6,4])
+    enc2, full2 = autoencoder(n_input=11, n_bottleneck=4, n_layers=[8,6])
 
     #Scaling features
     for col in features:
         features[col] -= features[col].min()
         features[col] /= features[col].max()
     
-    #An autoencoder is defined as output data = input data
+    #An autoencoder is defined as output data = input data, features are labels because of autoencoder architecture
     full.fit(features.values, features.values, epochs=50, batch_size=32, shuffle=True)
+    #Getting my reduced dimensionality feature set
+    #ORIGINAL DIMENSIONALITY: (1599, 11)
+    #NEW DIMENSIONALITY: (1599, 2)
+    features_reduced = enc.predict(features)
 
-    print(enc.predict(features))
+    #NEW DIMENSIONALITY: (1599, 4)
+    features_reduced2 = enc2.predict(features)
+
+    #Instantiating classifiers
+    classifier = wine_classifier.WineClassifier('data', 'xgb')
+    classifier_reduced = wine_classifier.WineClassifier('data', 'xgb')
+    classifier_reduced2 = wine_classifier.WineClassifier('data', 'xgb')
+    
+    #Fitting classifier on two dimensionalities
+    classifier.train(features=features, labels=labels)
+    classifier_reduced.train(features=features_reduced, labels=labels)
+    classifier_reduced2.train(features=features_reduced2, labels=labels)
+
+    print(f'Classifier Metadata: {classifier.metadata}')
+    print(f'Classifier Reduced Dimensionality 2 Metadata: {classifier_reduced.metadata}')
+    print(f'Classifier Reduced Dimensionality 4 Metadata: {classifier_reduced2.metadata}')
+
+
